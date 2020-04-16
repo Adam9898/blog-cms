@@ -18,6 +18,7 @@ class CreateBlogsTable extends Migration
             $table->string('title');
             $table->text('content');
             $table->foreignId("user_id")->constrained();
+            $table->softDeletes();
             $table->timestamps();
         });
     }

@@ -2,7 +2,7 @@
 
 namespace App;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
+use DateTimeInterface;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 
@@ -43,5 +43,9 @@ class User extends Authenticatable
 
     public function blogs() {
         return $this->hasMany('App\Blog');
+    }
+
+    protected function serializeDate(DateTimeInterface $date) {
+        return $date->format('Y-m-d H:i:s');
     }
 }
