@@ -10,6 +10,7 @@ use App\Repositories\UserRepository;
 use App\User;
 use App\Validation\UserValidatorRule;
 use Illuminate\Foundation\Auth\RegistersUsers;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
 
@@ -43,8 +44,7 @@ class RegisterController extends Controller
      *
      * @return void
      */
-    public function __construct(UserRepository $userRepository, RoleRepository $roleRepository)
-    {
+    public function __construct(UserRepository $userRepository, RoleRepository $roleRepository) {
         $this->middleware('guest');
         $this->userRepository = $userRepository;
         $this->roleRepository = $roleRepository;
@@ -56,8 +56,7 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \Illuminate\Contracts\Validation\Validator
      */
-    protected function validator(array $data)
-    {
+    protected function validator(array $data) {
         return Validator::make($data, UserValidatorRule::getValidationRules());
     }
 
@@ -67,12 +66,8 @@ class RegisterController extends Controller
      * @param  array  $data
      * @return \App\User
      */
-    protected function create(array $data)
-    {
-        $user = new User();
-        $user->name = $data['name'];
-        $user->email = $data['email'];
-        $user->password = Hash::make($data['password']);
+    protected function create(array $data) {
+        $user = new User($data);
         $this->userRepository->createNewUser($user);
         $user->roles()->attach($this->roleRepository->getRoleIdByName(UserRole::Regular));
         return $user;

@@ -3,8 +3,9 @@
 namespace Tests\Unit\ModelTests;
 
 use App\User;
+use Illuminate\Support\Facades\Hash;
 use Mockery;
-use PHPUnit\Framework\TestCase;
+use Tests\TestCase;
 
 class UserTest extends TestCase {
 
@@ -14,6 +15,7 @@ class UserTest extends TestCase {
         = 'p4M7RvuGe8diNfLgcSCPeVw3hNV5CYrfvkURfKHxj4ZvuNUMpXngRnigNzY3FMAiVrS5EyGqyDTPHaDXCnRERb4NBBuy7aEdD5wF';
 
     protected function setUp(): void {
+        parent::setUp();
         $this->user = Mockery::mock(User::class)->makePartial();
         $this->user->name = 'test name';
         $this->user->email = 'unique@test.com';
@@ -53,16 +55,16 @@ class UserTest extends TestCase {
     }
 
     // test disabled
-    public function testUserEmailVerifiedAtShouldBeEarlierThanNow() {
-        self::assertTrue($this->user->email_verified_at <= time());
+    public function UserEmailVerifiedAtShouldBeEarlierThanNow() {
+        assertTrue($this->user->email_verified_at <= time());
     }
 
     public function testUserPasswordShouldNotMatch() {
-        self::assertNotEquals('wrong password', $this->user->password);
+        self::assertNotEquals('secret', $this->user->password);
     }
 
     public function testUserPasswordShouldMatch() {
-        self::assertEquals('secret', $this->user->password);
+        self::assertTrue(Hash::check('secret', $this->user->password));
     }
 
     public function testUserRememberTokenShouldNotMatch() {
@@ -85,7 +87,19 @@ class UserTest extends TestCase {
         self::assertTrue($assertValue);
     }
 
+    public function testUserConstructorShouldConvertArrayToValidModel() {
+        $userInput = [
+            'name' => $this->user->name,
+            'email' => $this->user->email,
+            'password' => $this->user->password,
+            'password_confirmation' => 'random'
+        ];
+        $user = new User($userInput);
+        self::assertEquals($userInput['name'], $user->name);
+    }
+
     protected function tearDown(): void {
+        parent::tearDown();
         Mockery::close();
     }
 }

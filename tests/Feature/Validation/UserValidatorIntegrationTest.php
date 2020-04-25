@@ -37,6 +37,17 @@ class UserValidatorIntegrationTest extends TestCase {
         self::assertTrue($validator->fails());
     }
 
+    public function testValidationShouldFailBecauseOfPasswordIsNotConformingToRegex() {
+        $data = [
+            'name' => 'testname',
+            'email' => 'test@test.com',
+            'password' => 'secrettest88',
+            'password_confirmation' => 'secrettest88'
+        ];
+        $validator = Validator::make($data, UserValidatorRule::getValidationRules());
+        self::assertTrue($validator->fails());
+    }
+
     public function testValidationShouldPass() {
         self::assertFalse($this->validator->fails());
     }
