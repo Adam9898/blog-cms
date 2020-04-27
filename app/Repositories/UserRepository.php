@@ -12,4 +12,8 @@ class UserRepository {
         return $user->save();
     }
 
+    public function getUserRoles(User $user) {
+        return $user->roles()->getResults();
+    }
+
 }

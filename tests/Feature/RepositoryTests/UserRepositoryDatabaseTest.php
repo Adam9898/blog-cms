@@ -2,8 +2,11 @@
 
 namespace Tests\Feature\RepositoryTests;
 
+use App\Enums\UserRole;
 use App\Repositories\UserRepository;
+use App\Role;
 use App\User;
+use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -46,6 +49,21 @@ class UserRepositoryDatabaseTest extends TestCase
         $user = User::findOrFail($this->databaseData->id)->get();
         $user = $user[0];
         self::assertEquals($this->databaseData->content, $user->content);
+    }
+
+    public function testGetUserRolesShouldReturnACollection() {
+        $user = factory(User::class)->create();
+        $collection = self::$userRepository->getUserRoles($user);
+        self::assertInstanceOf(Collection::class, $collection);
+    }
+
+    public function testGetUserRolesShouldReturnProperRoles() {
+        $role = factory(Role::class)->create();
+        $user = factory(User::class)->create();
+        $user->roles()->attach(1); // role id 1 is regular
+        $collection = self::$userRepository->getUserRoles($user);
+        // expected role is REGULAR because that is what the role factory generates
+        self::assertEquals($role->role_name, $collection->find(1)->role_name);
     }
 
 }

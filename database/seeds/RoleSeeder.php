@@ -16,5 +16,8 @@ class RoleSeeder extends Seeder
         $role = new Role();
         $role->role_name = UserRole::Regular;
         $role->save();
+        $role = new Role();
+        $role->role_name = UserRole::Editor;
+        $role->save();
     }
 }

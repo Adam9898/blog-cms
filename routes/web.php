@@ -22,4 +22,5 @@ Route::resource('blogs', 'BlogController');
 
 Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// disabled
+//Route::get('/home', 'HomeController@index')->name('home');

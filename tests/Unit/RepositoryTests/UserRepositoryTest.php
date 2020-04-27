@@ -4,6 +4,7 @@ namespace Tests\Unit\RepositoryTests;
 
 use App\Repositories\UserRepository;
 use App\User;
+use Illuminate\Database\Eloquent\Collection;
 use Mockery;
 use PHPUnit\Framework\TestCase;
 
@@ -36,6 +37,14 @@ class UserRepositoryTest extends TestCase {
         $user = new User();
         $assertValue = $this->userRepository->createNewUser($user);
         self::assertTrue($assertValue);
+    }
+
+    public function testGetUserRolesShouldReturnACollection() {
+        $collection = new Collection();
+        $this->userRepository->allows('getUserRoles')->andReturn($collection);
+        $user = new User();
+        $assertValue = $this->userRepository->getUserRoles($user);
+        self::assertInstanceOf(Collection::class, $assertValue);
     }
 
     protected function tearDown(): void {

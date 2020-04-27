@@ -2,17 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Services\BlogService;
+use App\Repositories\BlogRepository;
 use Illuminate\Http\Request;
 
 class BlogController extends Controller
 {
 
-    private $blogService;
+    protected $blogRepository;
 
-    public function __construct(BlogService $blogService)
-    {
-        $this->blogService = $blogService;
+    public function __construct(BlogRepository $blogRepository) {
+        $this->blogRepository = $blogRepository;
     }
 
     /**
@@ -32,30 +31,27 @@ class BlogController extends Controller
      */
     public function create()
     {
-        //
+
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created blog post in the database.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
-    {
-        //
+    public function store(Request $request) {
+
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $id
+     * @param  int $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
-    {
-        // todo fetch Blog by id and return the model and pass it to the view
-        $blogToShow = $this->blogService->getBlogById($id);
+    public function show(int $id) {
+        $blogToShow = $this->blogRepository->getSpecificBlog($id);
         return view('blog', $blogToShow);
     }
 

@@ -2,6 +2,7 @@
 
 namespace Tests\Feature\ControllerTests;
 
+use App\Providers\RouteServiceProvider;
 use App\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
@@ -32,7 +33,7 @@ class RegisterControllerTest extends TestCase {
 
     public function testRegistrationRedirectsToHomePage() {
         $response = $this->post('/register', $this->data);
-        $response->assertRedirect('/home');
+        $response->assertRedirect(RouteServiceProvider::HOME);
     }
 
     public function testInvalidDataShouldNotBeRegisteredInsteadItShouldRedirectToMainPage() {
@@ -44,6 +45,6 @@ class RegisterControllerTest extends TestCase {
     public function testAuthenticatedUserShouldBeRedirectedToHomePage() {
         $user = factory(User::class)->create();
         $respone = $this->actingAs($user)->get('/register');
-        $respone->assertRedirect('/home');
+        $respone->assertRedirect(RouteServiceProvider::HOME);
     }
 }
