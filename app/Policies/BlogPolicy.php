@@ -3,6 +3,7 @@
 namespace App\Policies;
 
 use App\Blog;
+use App\Repositories\UserRepository;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
 
@@ -28,9 +29,8 @@ class BlogPolicy
      * @param  \App\Blog  $blog
      * @return mixed
      */
-    public function view(User $user, Blog $blog)
-    {
-        //
+    public function view(?User $user, Blog $blog) {
+        return true;
     }
 
     /**
@@ -40,7 +40,7 @@ class BlogPolicy
      * @return mixed
      */
     public function create(User $user) {
-        
+
     }
 
     /**
@@ -50,9 +50,8 @@ class BlogPolicy
      * @param  \App\Blog  $blog
      * @return mixed
      */
-    public function update(User $user, Blog $blog)
-    {
-        //
+    public function update(User $user, Blog $blog) {
+        return $blog->user->id == $user->id;
     }
 
     /**
@@ -64,7 +63,7 @@ class BlogPolicy
      */
     public function delete(User $user, Blog $blog)
     {
-        //
+        return $blog->user->id == $user->id;
     }
 
     /**

@@ -20,6 +20,10 @@ class Blog extends Model
         return $this->hasMany('App\Comment');
     }
 
+    protected $fillable = [
+        'title', 'content'
+    ];
+
     protected function serializeDate(DateTimeInterface $date) {
         return $date->format('Y-m-d H:i:s');
     }

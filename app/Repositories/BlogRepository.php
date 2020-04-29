@@ -27,6 +27,11 @@ class BlogRepository {
 
     public function insertBlog(Blog $blog) {
         $blog->save();
+        return $blog->id;
+    }
+
+    public function updateBlog(array $data, Blog $blog) {
+        return $blog->update($data);
     }
 
 }

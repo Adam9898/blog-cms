@@ -108,10 +108,37 @@ class BlogRepositoryDatabaseTest extends TestCase {
         self::assertNull(self::$blogRepository->getBlogsAndLimit(0));
     }
 
-    public function testInsertBlogInsertTheProperBlog() {
+    public function testInsertBlogShouldInsertTheProperBlog() {
         $blog = factory(Blog::class)->make();
         self::$blogRepository->insertBlog($blog);
         $blogRetunedFromDatabase = Blog::find($blog->id);
         self::assertEquals($blog->content, $blogRetunedFromDatabase->content);
+    }
+
+    public function testInertBlogShouldReturnInteger() {
+        $blog = factory(Blog::class)->make();
+        $assertValue = self::$blogRepository->insertBlog($blog);
+        self::assertIsInt($assertValue);
+    }
+
+    public function testInsertBlogdShouldReturnTheRightBlogId() {
+        $blog = factory(Blog::class)->make();
+        $originalId = 5; // should be 5th because 4 blogs are inserted in the setup method + 1 in this method
+        $insertedId = self::$blogRepository->insertBlog($blog);
+        self::assertEquals($originalId, $insertedId);
+    }
+
+
+    public function testUpdateBlogShouldReturnTrue() {
+        $modifiedBlogPostData = $this->databaseData->find(1)->toArray();
+        $modifiedBlogPostData['title'] = 'changed';
+        self::assertTrue(self::$blogRepository->updateBlog($modifiedBlogPostData, $this->databaseData->find(1)));
+    }
+
+    public function testUpdateBlogShouldModifyData() {
+        $modifiedBlogPostData = $this->databaseData->find(1)->toArray();
+        $modifiedBlogPostData['title'] = 'changed';
+        self::$blogRepository->updateBlog($modifiedBlogPostData, $this->databaseData->find(1));
+        $this->assertDatabaseHas(self::TABLE_NAME, $modifiedBlogPostData);
     }
 }

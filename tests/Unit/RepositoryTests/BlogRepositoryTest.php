@@ -4,6 +4,7 @@ namespace Tests\Unit\RepositoryTests;
 
 use App\Blog;
 use App\Repositories\BlogRepository;
+use DemeterChain\B;
 use Illuminate\Database\Eloquent\Collection;
 use Mockery;
 use PHPUnit\Framework\TestCase;
@@ -35,6 +36,24 @@ class BlogRepositoryTest extends TestCase {
         $blogCollection = new Collection();
         $this->blogRepository->allows('getBlogsAndLimit')->andReturn($blogCollection);
         self::assertInstanceOf(Collection::class, $blogCollection);
+    }
+
+    public function testInsertBlogShouldReturnInteger() {
+        $this->blogRepository->allows('insertBlog')->andReturn(1);
+        $assertValue = $this->blogRepository->insertBlog(new Blog());
+        self::assertIsInt($assertValue);
+    }
+
+    public function testUpdateBlogShouldReturnFalse() {
+        $this->blogRepository->allows('updateBlog')->andReturn(false);
+        $assertValue = $this->blogRepository->updateBlog([], new Blog());
+        self::assertFalse($assertValue);
+    }
+
+    public function testUpdateBlogShouldReturnTrue() {
+        $this->blogRepository->allows('updateBlog')->andReturn(true);
+        $assertValue = $this->blogRepository->updateBlog([], new Blog());
+        self::assertTrue($assertValue);
     }
 
     protected function tearDown(): void {
