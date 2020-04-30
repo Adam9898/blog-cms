@@ -9,6 +9,8 @@ use App\Repositories\BlogRepository;
 use Illuminate\Auth\Access\AuthorizationException;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Redirect;
 
 class BlogController extends Controller {
@@ -47,6 +49,7 @@ class BlogController extends Controller {
      */
     public function store(BlogRequest $request) {
         $blog = new Blog($request->post());
+        $blog->user_id = Auth::user()->getAuthIdentifier();
         $blogId = $this->blogRepository->insertBlog($blog);
         return redirect()->route('blogs.show', ['blog' => $blogId]);
     }
@@ -54,7 +57,7 @@ class BlogController extends Controller {
     /**
      * Display the specified blog.
      *
-     * @param Blog $blog
+     * @param Blog $blogs
      * @return \Illuminate\Http\Response
      */
     public function show(Blog $blogs) {
@@ -67,9 +70,9 @@ class BlogController extends Controller {
      * @param Blog $blog
      * @return void
      */
-    public function edit(Blog $blogs) {
-        $this->authorize('update', Blog::class);
-        return view('blog.edit', compact('blogs'));
+    public function edit(Blog $blog) {
+        $this->authorize('update', $blog);
+        return view('blog.edit', compact('blog'));
     }
 
     /**
@@ -79,21 +82,21 @@ class BlogController extends Controller {
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(BlogRequest $request, Blog $blogs) {
-        $this->authorize('update', Blog::class);
-        $this->blogRepository->updateBlog($request->post(), $blogs);
-        return redirect()->route('blog.show', ['blog' => $blogs->id]);
+    public function update(BlogRequest $request, Blog $blog) {
+        $this->authorize('update', $blog);
+        $this->blogRepository->updateBlog($request->post(), $blog);
+        return redirect()->route('blogs.show', ['blog' => $blog->id]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $id
+     * @param  Blog  $blog
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id) {
-        $this->authorize('delete', Blog::class);
-        $this->blogRepository->deleteSpecificBlog($id);
+    public function destroy(Blog $blog) {
+        $this->authorize('delete', $blog);
+        $this->blogRepository->deleteSpecificBlog($blog);
         return redirect()->home();
     }
 }

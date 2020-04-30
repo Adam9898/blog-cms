@@ -6,6 +6,7 @@ namespace App\Repositories;
 
 use App\Blog;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class BlogRepository {
 
@@ -13,8 +14,8 @@ class BlogRepository {
         return Blog::find($blogId);
     }
 
-    public function deleteSpecificBlog($blogId) {
-        Blog::destroy($blogId);
+    public function deleteSpecificBlog(Blog $blog) {
+        $blog->delete();
     }
 
     public function getBlogsAndLimit($limit) {

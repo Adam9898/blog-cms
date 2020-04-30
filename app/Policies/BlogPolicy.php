@@ -6,6 +6,7 @@ use App\Blog;
 use App\Repositories\UserRepository;
 use App\User;
 use Illuminate\Auth\Access\HandlesAuthorization;
+use Illuminate\Support\Facades\Log;
 
 class BlogPolicy
 {
@@ -51,7 +52,7 @@ class BlogPolicy
      * @return mixed
      */
     public function update(User $user, Blog $blog) {
-        return $blog->user->id == $user->id;
+        return $blog->user->getAuthIdentifier() == $user->getAuthIdentifier();
     }
 
     /**
@@ -61,9 +62,8 @@ class BlogPolicy
      * @param  \App\Blog  $blog
      * @return mixed
      */
-    public function delete(User $user, Blog $blog)
-    {
-        return $blog->user->id == $user->id;
+    public function delete(User $user, Blog $blog) {
+        return $blog->user->getAuthIdentifier() == $user->getAuthIdentifier();
     }
 
     /**

@@ -60,12 +60,12 @@ class BlogRepositoryDatabaseTest extends TestCase {
     }
 
     public function testDeleteSpecificBlogShouldNotDeleteTheWrongBlog() {
-        self::$blogRepository->deleteSpecificBlog(1);
+        self::$blogRepository->deleteSpecificBlog($this->databaseData->find(1));
         self::assertNotNull(Blog::find(2));
     }
 
     public function testDeleteSpecificBlogShouldDeleteABlog() {
-        self::$blogRepository->deleteSpecificBlog(1);
+        self::$blogRepository->deleteSpecificBlog($this->databaseData->find(1));
         $suspectedDeletedBlog = $this->databaseData->find(1)->toArray();
         $this->assertSoftDeleted(self::TABLE_NAME, $suspectedDeletedBlog);
     }
