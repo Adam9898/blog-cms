@@ -72,4 +72,12 @@ class RegisterController extends Controller
         $user->roles()->attach($this->roleRepository->getRoleIdByName(UserRole::Regular));
         return $user;
     }
+
+    public function uniqueEmailValidator(string $email) {
+        $user = $this->userRepository->findUserByEmail($email);
+        return [
+            'email' => $email,
+            'valid'  => $user == null
+        ];
+    }
 }

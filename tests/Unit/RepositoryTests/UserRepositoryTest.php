@@ -47,6 +47,12 @@ class UserRepositoryTest extends TestCase {
         self::assertInstanceOf(Collection::class, $assertValue);
     }
 
+    public function testFindUserByEmail() {
+        $this->userRepository->allows('findUserByEmail')->andReturn(new User());
+        $assertValue = $this->userRepository->findUserByEmail('test@test.com');
+        self::assertInstanceOf(User::class, $assertValue);
+    }
+
     protected function tearDown(): void {
         parent::tearDown();
         Mockery::close();

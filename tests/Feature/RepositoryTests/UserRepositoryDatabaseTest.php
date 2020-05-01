@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
+use Illuminate\Support\Facades\Log;
 use Tests\TestCase;
 
 class UserRepositoryDatabaseTest extends TestCase
@@ -64,6 +65,18 @@ class UserRepositoryDatabaseTest extends TestCase
         $collection = self::$userRepository->getUserRoles($user);
         // expected role is REGULAR because that is what the role factory generates
         self::assertEquals($role->role_name, $collection->find(1)->role_name);
+    }
+
+    public function testFindUserByEmailShouldReturnAUser() {
+        $this->databaseData->save();
+        $user = self::$userRepository->findUserByEmail($this->databaseData->email);
+        self::assertInstanceOf(User::class, $user);
+    }
+
+    public function testFindUserByEmailShouldReturnTheProperUser() {
+        $this->databaseData->save();
+        $user = self::$userRepository->findUserByEmail($this->databaseData->email);
+        self::assertEquals($this->databaseData->id, $user->id);
     }
 
 }

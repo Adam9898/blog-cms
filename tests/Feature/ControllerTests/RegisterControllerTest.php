@@ -47,4 +47,19 @@ class RegisterControllerTest extends TestCase {
         $respone = $this->actingAs($user)->get('/register');
         $respone->assertRedirect(RouteServiceProvider::HOME);
     }
+
+    public function testUniqueEmailValidatorShouldReturnStatusCode200() {
+        $response = $this->get('/api/unique-email/test@test.com');
+        $response->assertOk();
+    }
+
+    public function testUniqueEmailValidatorShouldReturnAJsonResponse() {
+        $response = $this->get('/api/unique-email/test@test.com');
+        $response->assertJsonStructure(['email', 'valid']);
+    }
+
+    public function testUniqueEmailValidatorShouldReturnExactJson() {
+        $response = $this->get('/api/unique-email/test@test.com');
+        $response->assertExactJson(['email' => 'test@test.com', 'valid' => true]);
+    }
 }

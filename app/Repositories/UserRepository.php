@@ -5,6 +5,7 @@ namespace App\Repositories;
 
 
 use App\User;
+use Illuminate\Support\Facades\DB;
 
 class UserRepository {
 
@@ -14,6 +15,10 @@ class UserRepository {
 
     public function getUserRoles(User $user) {
         return $user->roles()->getResults();
+    }
+
+    public function findUserByEmail(string $email) {
+        return User::where('email', $email)->first();
     }
 
 }
