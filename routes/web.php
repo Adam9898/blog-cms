@@ -20,6 +20,10 @@ Route::get('/', function () {
 
 Route::resource('blogs', 'BlogController');
 
+Route::post('/comments', 'CommentController@store')->name('comments.store');
+
+Route::delete('/comments/{comment}', 'CommentController@destroy')->name('comments.destroy');
+
 Auth::routes();
 
 // disabled

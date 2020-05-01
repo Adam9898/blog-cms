@@ -5,8 +5,10 @@ namespace App;
 use DateTimeInterface;
 use Illuminate\Database\Eloquent\Model;
 
-class Comment extends Model
-{
+class Comment extends Model {
+
+    protected $fillable = ['content'];
+
     public function blog() {
         return $this->belongsTo('App\Blog');
     }
