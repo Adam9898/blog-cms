@@ -53,6 +53,12 @@ class UserRepositoryTest extends TestCase {
         self::assertInstanceOf(User::class, $assertValue);
     }
 
+    public function testGetAllShouldReturnACollection() {
+        $this->userRepository->allows('getAll')->andReturn(new Collection());
+        $assertValue = $this->userRepository->getAll();
+        self::assertInstanceOf(Collection::class, $assertValue);
+    }
+
     protected function tearDown(): void {
         parent::tearDown();
         Mockery::close();

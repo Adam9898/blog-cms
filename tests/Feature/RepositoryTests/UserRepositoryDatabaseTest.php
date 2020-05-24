@@ -79,4 +79,9 @@ class UserRepositoryDatabaseTest extends TestCase
         self::assertEquals($this->databaseData->id, $user->id);
     }
 
+    public function testGetAllShouldReturnACollection() {
+        $users = self::$userRepository->getAll();
+        self::assertInstanceOf(Collection::class, $users);
+    }
+
 }
