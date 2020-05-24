@@ -6,6 +6,7 @@ use App\Blog;
 use App\Enums\UserRole;
 use App\Http\Requests\BlogRequest;
 use App\Notifications\BlogCreated;
+use App\Notifications\BlogUpdated;
 use App\Repositories\BlogRepository;
 use App\Repositories\UserRepository;
 use App\User;
@@ -58,19 +59,8 @@ class BlogController extends Controller {
         $blog = new Blog($request->post());
         $blog->user_id = Auth::user()->getAuthIdentifier();
         $blogId = $this->blogRepository->insertBlog($blog);
-        $this->saveAndBroadcastBlogCreatedNotification($blog);
+        event(new BlogCreated($blog));
         return redirect()->route('blogs.show', ['blog' => $blogId]);
-    }
-
-    /**
-     * Helper function which queries all the users from the database, and then creates a new BlogCreated
-     * notification. The notification will be saved in the database and then gets broadcasted to users
-     * @param $blog
-     */
-    private function saveAndBroadcastBlogCreatedNotification($blog) {
-        Log::info($blog);
-        $users = $this->userRepository->getAll();
-        Notification::send($users, new BlogCreated($blog));
     }
 
     /**
@@ -104,6 +94,7 @@ class BlogController extends Controller {
     public function update(BlogRequest $request, Blog $blog) {
         $this->authorize('update', $blog);
         $this->blogRepository->updateBlog($request->post(), $blog);
+        event(new BlogUpdated($blog));
         return redirect()->route('blogs.show', ['blog' => $blog->id]);
     }
 

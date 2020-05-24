@@ -3,31 +3,23 @@
 namespace App\Notifications;
 
 use App\Blog;
-use App\User;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
-class BlogCreated extends Notification implements ShouldQueue {
+class BlogUpdated extends Notification {
     use Queueable;
 
     private Blog $blog;
-    private $data = [
-        'blogAuthor' => null,
-        'blogTitle' => null
-    ];
 
     /**
      * Create a new notification instance.
      *
-     * @param $blog
+     * @return void
      */
     public function __construct($blog) {
         $this->blog = $blog;
-        $this->data['blogAuthor'] = $this->blog->user->name;
-        $this->data['blogTitle'] = $this->blog->title;
     }
 
     /**
@@ -40,11 +32,6 @@ class BlogCreated extends Notification implements ShouldQueue {
         return ['database', 'broadcast'];
     }
 
-    public function toBroadcast($notifiable) {
-        return new BroadcastMessage($this->data);
-    }
-
-
     /**
      * Get the array representation of the notification.
      *
@@ -52,6 +39,9 @@ class BlogCreated extends Notification implements ShouldQueue {
      * @return array
      */
     public function toArray($notifiable) {
-        return $this->data;
+        return [
+            'blogTitle' => $this->blog->title,
+            'blogAuthor' => $this->blog->user->name
+        ];
     }
 }

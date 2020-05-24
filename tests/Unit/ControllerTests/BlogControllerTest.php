@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Notification;
 use Illuminate\Support\Facades\Queue;
@@ -101,15 +102,11 @@ class BlogControllerTest extends TestCase {
     }
 
     // todo solve problem with blog author(user) is not an object
-    /*public function testStoreShouldRedirectToProperUrl() {
+   /* public function testStoreShouldRedirectToProperUrl() {
         $this->bindMockedInsertBlogMethodOnBlogRepository();
-        $this->mock(UserRepository::class, function ($userRepository) {
-            $userRepository->allows('getAll')->andReturn(new Collection());
-        });
-        Notification::fake();
-        $user = new User();
-        $user->name = "test name";
-        Auth::shouldReceive('user')->andReturn($user);
+        Event::fake();
+
+        Auth::shouldReceive('user')->andReturn(new User());
         $response = $this->post('/blogs', $this->getStorePostData());
         $response->assertRedirect('/blogs/1');
     }*/
