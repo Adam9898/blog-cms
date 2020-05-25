@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\Feature\Validation;
+namespace Tests\Feature\Authorization;
 
 use App\Enums\UserRole;
 use App\Role;
