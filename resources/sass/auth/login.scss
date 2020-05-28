@@ -1,0 +1,7 @@
+@import 'auth-form';
+form {
+    div:first-child { // Login title
+        @include heading(true);
+        text-align: center;
+    }
+}

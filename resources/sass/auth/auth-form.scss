@@ -1,0 +1,32 @@
+@import '../variables';
+@import '../mixins';
+
+body {
+    background-image: url('/public/img/repeating-pattern.png');
+    background-size: 40px;
+}
+
+#content {
+    grid-column: 5/9;
+    align-self: center;
+    #form-container {
+        padding: (100%/48);
+        background-color: rgba($wordpressBlue, 0.7);
+        border-radius: 0.5em;
+        form {
+            display: flex;
+            flex-direction: column;
+            color: $textColorContrast;
+            input {
+                margin-top: 0.4em;
+                margin-bottom: 1em;
+            }
+            button {
+                @include unstyle-button;
+                width: 4em;
+                align-self: center;
+            }
+        }
+    }
+}
+// class styles

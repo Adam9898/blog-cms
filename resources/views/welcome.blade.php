@@ -1,100 +1,16 @@
-<!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1">
+@extends('layouts.app')
+@section('title', 'welcome')
+@section('content')
+    <p> Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aliquam luctus condimentum est quis auctor.
+        Proin ornare laoreet ex at efficitur. Integer congue consequat lacus maximus hendrerit.
+        Mauris laoreet fringilla lectus vitae eleifend. Sed tempor vel odio quis cursus. Suspendisse rhoncus orci vel
+        arcu dignissim fermentum. Mauris vitae mollis mauris, ac lobortis tellus. Integer porta congue nisl ac aliquam.
+        Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Vestibulum sed neque nec
+        ipsum sodales rhoncus. Vivamus erat mauris, cursus et est at, rutrum viverra orci.
 
-        <title>Laravel</title>
+        Nulla facilisi. Aliquam sapien nisl, facilisis nec dignissim sed, efficitur et augue. Curabitur nec mauris sed orci dignissim faucibus. Aliquam egestas lectus quis risus eleifend convallis. Donec eu sodales turpis. Maecenas ut ex rhoncus, ullamcorper leo nec, euismod ex. Quisque tristique enim cursus aliquet cursus. Nam bibendum odio lectus, quis pretium ante finibus quis. Nam nec sollicitudin tortor, eget vestibulum sapien. Donec finibus cursus nunc, non egestas leo aliquet ac. Donec vestibulum, arcu rutrum pulvinar molestie, enim leo consequat quam, ac lobortis eros tellus eu enim. Aenean convallis tellus faucibus, dignissim diam sollicitudin, fringilla libero. Aliquam erat volutpat. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas.
 
-        <!-- Fonts -->
-        <link href="https://fonts.googleapis.com/css?family=Nunito:200,600" rel="stylesheet">
+        Aenean ut ex elementum, scelerisque est at, dictum felis. Mauris suscipit malesuada odio, nec interdum tellus ultrices eu. Cras nibh quam, porttitor sit amet orci ac, varius ultrices orci. In aliquet leo et tempus tempor. Etiam sed auctor nisl. Vestibulum lobortis, massa quis semper ultrices, erat risus scelerisque eros, aliquam tristique lacus tortor eu nisl. Maecenas pretium, dolor at facilisis lobortis, mi augue efficitur est, eget dignissim arcu urna vel est. Maecenas ligula libero, vulputate id leo nec, aliquet luctus urna. Nunc efficitur in libero at auctor. Aenean at porttitor augue. In mollis facilisis lorem, in pharetra risus posuere eu. Duis accumsan hendrerit massa, nec semper felis fermentum a. Phasellus sagittis lacinia maximus. Donec molestie faucibus diam vel scelerisque. Curabitur vehicula ultrices tellus, sed bibendum dui tincidunt sed.
 
-        <!-- Styles -->
-        <style>
-            html, body {
-                background-color: #fff;
-                color: #636b6f;
-                font-family: 'Nunito', sans-serif;
-                font-weight: 200;
-                height: 100vh;
-                margin: 0;
-            }
-
-            .full-height {
-                height: 100vh;
-            }
-
-            .flex-center {
-                align-items: center;
-                display: flex;
-                justify-content: center;
-            }
-
-            .position-ref {
-                position: relative;
-            }
-
-            .top-right {
-                position: absolute;
-                right: 10px;
-                top: 18px;
-            }
-
-            .content {
-                text-align: center;
-            }
-
-            .title {
-                font-size: 84px;
-            }
-
-            .links > a {
-                color: #636b6f;
-                padding: 0 25px;
-                font-size: 13px;
-                font-weight: 600;
-                letter-spacing: .1rem;
-                text-decoration: none;
-                text-transform: uppercase;
-            }
-
-            .m-b-md {
-                margin-bottom: 30px;
-            }
-        </style>
-    </head>
-    <body>
-        <div class="flex-center position-ref full-height">
-            @if (Route::has('login'))
-                <div class="top-right links">
-                    @auth
-                        <a href="{{ url('/home') }}">Home</a>
-                    @else
-                        <a href="{{ route('login') }}">Login</a>
-
-                        @if (Route::has('register'))
-                            <a href="{{ route('register') }}">Register</a>
-                        @endif
-                    @endauth
-                </div>
-            @endif
-
-            <div class="content">
-                <div class="title m-b-md">
-                    Laravel
-                </div>
-
-                <div class="links">
-                    <a href="https://laravel.com/docs">Docs</a>
-                    <a href="https://laracasts.com">Laracasts</a>
-                    <a href="https://laravel-news.com">News</a>
-                    <a href="https://blog.laravel.com">Blog</a>
-                    <a href="https://nova.laravel.com">Nova</a>
-                    <a href="https://forge.laravel.com">Forge</a>
-                    <a href="https://vapor.laravel.com">Vapor</a>
-                    <a href="https://github.com/laravel/laravel">GitHub</a>
-                </div>
-            </div>
-        </div>
-    </body>
-</html>
+        In a massa ac leo tincidunt tempor eu a purus. Pellentesque id tortor at libero fringilla feugiat mattis quis diam. Nam egestas cursus metus vitae ornare. Donec cursus eget neque laoreet fringilla. Cras eleifend urna eu nisl fermentum ornare. Maecenas a commodo est, vel facilisis ligula. Nullam auctor porta nulla, quis finibus ipsum rutrum in. Proin sed ornare leo, eu eleifend odio. Vivamus fringilla efficitur ligula, eget tempor ante pharetra quis. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer egestas aliquet laoreet. Morbi eu aliquet mi. Pellentesque ut arcu nisl. Phasellus nibh ligula, sagittis in purus ut, finibus sollicitudin turpis. Donec ut vestibulum leo. </p>
+@endsection

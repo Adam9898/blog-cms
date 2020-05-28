@@ -1,8 +1,77 @@
 // Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
+@font-face {
+    src: url('/public/fonts/OpenSans-Regular.ttf');
+    font-family: opensans;
+}
 
-// Variables
+// Imports (before)
 @import 'variables';
+@import 'mixins';
 
-// Bootstrap
-@import '~bootstrap/scss/bootstrap';
+html, body {
+    height: 100%;
+}
+
+
+// layout
+body {
+    display: grid;
+    margin: 0;
+    font-family: $font-family-sans-serif;
+    font-size: 12pt;
+    color: $textColorMain;
+    grid-template-areas: 'hd hd hd hd hd hd hd hd hd hd hd hd'
+                         '. . mn mn mn mn mn mn mn mn . .'
+                         'ft ft ft ft ft ft ft ft ft ft ft ft';
+    grid-template-columns: repeat(12, 1fr);
+    grid-template-rows: auto 1fr 2.2em;
+}
+
+header {
+    display: flex;
+    grid-area: hd;
+    justify-content: space-between;
+    padding: 1.5em 1em;
+    background-color: $wordpressBlue;
+    color: $textColorContrast;
+    #logo {
+        font-size: 13pt;
+        font-weight: bold;
+        text-shadow: -2px 3px 3px rgb(0, 0, 0);
+        text-decoration: none;
+    }
+    a {
+        color: $textColorContrast;
+    }
+    span {
+        &:last-child { // auth buttons container
+            #register-anchor {
+                margin-left: $buttonsNextToEachOtherMarginSize;
+            }
+        }
+    }
+}
+
+// main section of the page
+#content {
+    grid-area: mn;
+}
+
+footer {
+    display: flex;
+    grid-area: ft;
+    background-color: $wordpressBlue;
+    color: $textColorContrast;
+    justify-content: center;
+    align-items: center;
+    font-size: 10pt;
+}
+
+
+// style classes
+.link-button-main {
+    @include link-button-big($textColorContrast, 0.4em, $wordpressBlue);
+    text-decoration: none;
+    animation-name: fade-from-side;
+    transition: background-color 0.3s, color 0.2s;
+}

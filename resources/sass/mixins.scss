@@ -1,0 +1,22 @@
+@mixin link-button-big($color, $padding, $hoverColor) {
+    border-radius: $borderStyleButtons;
+    border: 1px solid $color;
+    padding: $padding;
+    &:hover, &:focus {
+        background-color: $color;
+        color: $hoverColor;
+    }
+}
+
+@mixin unstyle-button {
+    background: white none;
+    border: none;
+    cursor: pointer;
+}
+
+@mixin heading($isBold: false) {
+    font-size: $heading-size;
+    @if $isBold {
+        font-weight: bold;
+    }
+}
