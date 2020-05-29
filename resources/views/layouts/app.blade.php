@@ -25,11 +25,16 @@
             </span>
         @endguest
         @auth
-            <span><img src="{{ asset('img/notification.png')  }}" alt="notifications"></span>
-            <form id="logout-form" action="{{ route('logout') }}" method="POST">
-                {{ csrf_field() }}
-                <button type="submit">Logout</button>
-            </form>
+            <div id="header-end-container">
+                <button id="notification-icon-container"><img src="{{ asset('img/notification.png')  }}"
+                                                              alt="notifications">
+                    <span class="button-badge">3</span>
+                </button>
+                <form id="logout-form" action="{{ route('logout') }}" method="POST">
+                    {{ csrf_field() }}
+                    <button class="btn-main" type="submit">Logout</button>
+                </form>
+            </div>
             <div id="notification-container" hidden>
                 @for($i = 0; $i < sizeof(Auth::user()->notifications) && $i < 10; $i++)
                     @php

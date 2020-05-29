@@ -1,0 +1,10 @@
+#form-container {
+    text-align: center;
+    form {
+        display: flex;
+        flex-direction: column;
+        textarea {
+            resize: vertical;
+        }
+    }
+}

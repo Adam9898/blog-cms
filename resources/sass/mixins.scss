@@ -9,9 +9,16 @@
 }
 
 @mixin unstyle-button {
-    background: white none;
+    background: none;
+    padding: 0;
     border: none;
     cursor: pointer;
+    outline: none;
+}
+
+@mixin unstyle-input-field {
+    border: none;
+    outline: none;
 }
 
 @mixin heading($isBold: false) {

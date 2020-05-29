@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 // Fonts
 @font-face {
     src: url('/public/fonts/OpenSans-Regular.ttf');
@@ -10,6 +12,10 @@
 
 html, body {
     height: 100%;
+}
+
+h1, h2 {
+    margin: 0;
 }
 
 
@@ -50,6 +56,24 @@ header {
             }
         }
     }
+    #header-end-container {
+        display: flex;
+        #notification-icon-container {
+            @include unstyle-button;
+            display: flex;
+            align-items: center;
+            position: relative; // for the badge
+            img {
+                width: 18px;
+            }
+            &:hover, &:focus {
+                transform: scale(1.2);
+            }
+        }
+        button {
+            margin-left: 30px;
+        }
+    }
 }
 
 // main section of the page
@@ -74,4 +98,30 @@ footer {
     text-decoration: none;
     animation-name: fade-from-side;
     transition: background-color 0.3s, color 0.2s;
+}
+
+.error {
+    color: red;
+}
+
+.btn-main {
+    @include unstyle-button;
+    background: $windowsStyleGradient;
+    align-self: center;
+    padding: .3em 1em;
+    border: solid 2px black;
+    &:hover, &:focus {
+        border-color: color.scale($wordpressBlue, $lightness: 35%);
+    }
+}
+
+.button-badge {
+    background-color: #fa3e3e;
+    border-radius: 2px;
+    color: white;
+    padding: 1px 2px;
+    font-size: 10px;
+    position: absolute; // Position the badge within the relatively positioned button
+    top: 0;
+    right: 0;
 }

@@ -1,11 +1,8 @@
 @import 'auth-form';
+
 form {
-    div:first-child { // Login title
+    div:first-child { // Register title
         @include heading(true);
         text-align: center;
     }
-}
-
-.error {
-    margin-bottom: 10px;
 }

@@ -1,3 +1,5 @@
+@use 'sass:color';
+
 @import '../variables';
 @import '../mixins';
 
@@ -10,7 +12,7 @@ body {
     grid-column: 5/9;
     align-self: center;
     #form-container {
-        padding: (100%/48);
+        padding: (100vw/96) (100vw/48);
         background-color: rgba($wordpressBlue, 0.7);
         border-radius: 0.5em;
         form {
@@ -18,13 +20,14 @@ body {
             flex-direction: column;
             color: $textColorContrast;
             input {
+                @include unstyle-input-field;
                 margin-top: 0.4em;
                 margin-bottom: 1em;
-            }
-            button {
-                @include unstyle-button;
-                width: 4em;
-                align-self: center;
+                border: solid 3px $wordpressBlue;
+                height: 2em;
+                &:focus {
+                    border-color: color.scale($wordpressBlue, $lightness: 35%);
+                }
             }
         }
     }
