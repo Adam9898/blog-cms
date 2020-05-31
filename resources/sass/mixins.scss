@@ -27,3 +27,14 @@
         font-weight: bold;
     }
 }
+
+@mixin input-main {
+    @include unstyle-input-field;
+    margin-top: 0.4em;
+    margin-bottom: 1em;
+    border: solid 3px $wordpressBlue;
+    height: 2em;
+    &:focus {
+        border-color: color.scale($wordpressBlue, $lightness: 35%);
+    }
+}

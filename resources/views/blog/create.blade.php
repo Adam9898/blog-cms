@@ -9,11 +9,14 @@
 @section('content')
     <div id="form-container">
         <h1>Create a new blog post</h1>
-        <form method="POST" action="{{ route('blogs.create') }}">
+        <form id="edit-form" method="POST" action="{{ route('blogs.store') }}">
             <label for="blog-title">Title</label>
-            <input type="text" id="blog-title" required>
+            <input type="text" id="blog-title" name="title" required>
             <label for="blog-content">Content</label>
-            <textarea type="text" id="blog-title" required></textarea>
+            <div id="editor"></div>
+            <input id="post-content" type="hidden" name="content">
+            @csrf
+            <button class="btn-main" type="submit">Create blog post</button>
         </form>
     </div>
 @endsection

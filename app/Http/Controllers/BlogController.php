@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Blog;
 use App\Enums\UserRole;
+use App\Events\BlogCreatedEvent;
+use App\Events\BlogUpdatedEvent;
 use App\Http\Requests\BlogRequest;
 use App\Notifications\BlogCreated;
 use App\Notifications\BlogUpdated;
@@ -59,7 +61,7 @@ class BlogController extends Controller {
         $blog = new Blog($request->post());
         $blog->user_id = Auth::user()->getAuthIdentifier();
         $blogId = $this->blogRepository->insertBlog($blog);
-        event(new BlogCreated($blog));
+        event(new BlogCreatedEvent($blog));
         return redirect()->route('blogs.show', ['blog' => $blogId]);
     }
 
@@ -94,7 +96,7 @@ class BlogController extends Controller {
     public function update(BlogRequest $request, Blog $blog) {
         $this->authorize('update', $blog);
         $this->blogRepository->updateBlog($request->post(), $blog);
-        event(new BlogUpdated($blog));
+        event(new BlogUpdatedEvent($blog));
         return redirect()->route('blogs.show', ['blog' => $blog->id]);
     }
 
