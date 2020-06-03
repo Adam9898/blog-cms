@@ -10,6 +10,7 @@
     <div id="form-container">
         <h1>Create a new blog post</h1>
         <form id="edit-form" method="POST" action="{{ route('blogs.store') }}">
+            <p class="validation-error hide-tag" id="blog-title-error"></p>
             <label for="blog-title">Title</label>
             <input type="text" id="blog-title" name="title" required>
             <label for="blog-content">Content</label>

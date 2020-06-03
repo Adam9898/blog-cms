@@ -3,6 +3,9 @@
 @import 'variables';
 @import 'mixins';
 
+// variables specific for update/create page
+$formButtonTopMargin: 12px;
+
 #form-container {
     text-align: center;
     display: flex;
@@ -29,7 +32,7 @@
         }
         > button {
             align-self: flex-end;
-            margin-top: 12px;
+            margin-top: $formButtonTopMargin;
         }
     }
 }
@@ -46,6 +49,25 @@
     }
 }
 
+// specifics for update
+#update-button-container {
+    display: flex;
+    justify-content: space-between;
+    flex-direction: row-reverse;
+    margin-top: $formButtonTopMargin;
+    button {
+        &:last-child { // delete button
+            color: red;
+            &:hover, &:focus {
+                border-color: red;
+            }
+        }
+    }
+}
+
+#delete-blog-form {
+    display: none;
+}
 
 // quill snow theme
 
@@ -57,7 +79,7 @@
  */
 .ql-container {
     box-sizing: border-box;
-    font-family: Helvetica, Arial, sans-serif;
+    font-family: $font-family-sans-serif;
     font-size: 13px;
     height: 100%;
     margin: 0px;

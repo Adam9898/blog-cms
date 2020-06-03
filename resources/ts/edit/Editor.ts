@@ -1,5 +1,7 @@
 import Quill from 'quill';
 import $ from 'jquery';
+import {BlogPost} from "../models/BlogPost";
+import {validateOrReject} from "class-validator";
 
 export class Editor {
 
@@ -33,6 +35,7 @@ export class Editor {
 
     constructor() {
         this.activateEventListeners();
+        this.qEditor.root.innerHTML = $('#post-content').val() as string;
     }
 
     activateEventListeners() {
@@ -42,11 +45,37 @@ export class Editor {
     copyEditorContentToHiddenInput() {
         $('#edit-form').on('submit', (event: Event) => {
             event.preventDefault();
+            let title = $('#blog-title').val() as string;
             let editorValue = this.qEditor.root.innerHTML;
-            $('#post-content').val(editorValue);
-            let form = document.getElementById('edit-form') as HTMLFormElement;
-            form.submit();
+            let post = new BlogPost(title, editorValue);
+            $('#post-content').val(post.content);
+            this.validatePost(post);
         });
     }
 
+    private submitForm() {
+        let form = document.getElementById('edit-form') as HTMLFormElement;
+        form.submit();
+    }
+
+    private async validatePost(post: BlogPost) {
+        try {
+            await validateOrReject(post);
+            this.submitForm();
+        } catch (errors) {
+            console.error(errors);
+            this.handleInvalidPost(errors);
+        }
+    }
+
+    private handleInvalidPost(errors: any) {
+        // the code expects one specific error in this case
+        const errorContainer = $('#blog-title-error');
+        errorContainer.text(errors[0].constraints.length);
+        errorContainer.removeClass('hide-tag');
+    }
+
+    setEditorContent(content: string) {
+        this.qEditor.root.innerHTML = content;
+    }
 }

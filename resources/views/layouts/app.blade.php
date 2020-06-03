@@ -37,9 +37,6 @@
             </div>
             <div id="notification-container" hidden>
                 @for($i = 0; $i < sizeof(Auth::user()->notifications) && $i < 10; $i++)
-                    @php
-                        Auth::user()->notifications[$i]->markAsRead;
-                    @endphp
                     <div class="notification">
                         <a href="{{ Auth::user()->notifications[$i]->type }}">
                             <p id="notification-headline">{{ Auth::user()->notifications[$i] }}
@@ -49,6 +46,11 @@
                     </div>
                 @endfor
             </div>
+            @php
+                for ($i = 0; $i < sizeof(Auth::user()->notifications) && $i < 10; $i++) {
+                       Auth::user()->notifications[$i]->markAsRead();
+                }
+            @endphp
         @endauth
     </header>
     <div id="content">
