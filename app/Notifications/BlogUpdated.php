@@ -7,6 +7,7 @@ use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
+use Illuminate\Routing\Route;
 
 class BlogUpdated extends Notification {
     use Queueable;
@@ -41,7 +42,8 @@ class BlogUpdated extends Notification {
     public function toArray($notifiable) {
         return [
             'blogTitle' => $this->blog->title,
-            'blogAuthor' => $this->blog->user->name
+            'blogAuthor' => $this->blog->user->name,
+            'url' => 'blogs/' . $this->blog->id
         ];
     }
 }

@@ -1,13 +1,13 @@
 import $ from 'jquery';
 import {EditOrUpdatePost} from "./page-controller/EditOrUpdatePost";
 import {Registration} from "./page-controller/Registration";
-
-console.log("Typescript works");
+import {NotificationInit} from "./notifications/NotificationInit";
 
 class App {
 
     editOrUpdate: EditOrUpdatePost | null = null;
     registration: Registration | null = null;
+    notifications: NotificationInit | null = null;
 
     constructor() {
         this.initializeScripts();
@@ -19,6 +19,7 @@ class App {
         } else if (this.htmlElementExists('#register-form')) {
             this.registration = new Registration();
         }
+        this.notifications = new NotificationInit();
     }
 
     private htmlElementExists(elementQuerySelector: string) {
@@ -27,4 +28,5 @@ class App {
 
 }
 
-let app = new App();
+
+(window as any).app = new App();
