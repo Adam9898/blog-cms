@@ -56,17 +56,15 @@
                         </a>
                     @endfor
                     <template>
-                        <div class="notification">
-                            <a href="">
-                                <p class="notification-headline"></p>
-                                <p class="notification-content"></p>
-                            </a>
-                        </div>
+                        <a class="notification unread-notification" href="">
+                            <p class="notification-headline"></p>
+                            <p class="notification-content"></p>
+                        </a>
                     </template>
                 </div>
             </div>
             @php
-                for ($i = 0; $i < sizeof(Auth::user()->notifications) && $i < 10; $i++) {
+                for ($i = 0; $i < sizeof(Auth::user()->notifications); $i++) {
                        Auth::user()->notifications[$i]->markAsRead();
                 }
             @endphp

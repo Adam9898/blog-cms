@@ -43,7 +43,7 @@ class BlogUpdated extends Notification {
         return [
             'blogTitle' => $this->blog->title,
             'blogAuthor' => $this->blog->user->name,
-            'url' => 'blogs/' . $this->blog->id
+            'url' => '/blogs/' . $this->blog->id
         ];
     }
 }

@@ -52,11 +52,23 @@ export class NotificationInit {
     static addBlogNotificationToDOM(notification: CMSNotification<Blog>) {
         const notificationTemplate = document.querySelector('#notification-container template') as
             HTMLTemplateElement;
-        const notificationNode = notificationTemplate.content.cloneNode(true) as JQuery.Node;
-        $(notificationNode + ' .notification-headline').text(`A blog post has been ${notification.type}`);
-        $(notificationNode + '.notification-content').text(`The blog post is named <b>${notification.data.title}</b>
-        and is written by <b>${notification.data.author}</b>`)
-        $('#notification-container').append(notificationNode);
+        const notificationNode = notificationTemplate.content.cloneNode(true);
+        console.log(notification);
+        $('.notification .notification-headline', notificationNode).html(`A blog post has been <b>${notification.type.toLowerCase()}</b>`);
+        $('.notification .notification-content', notificationNode).html(`Blog post title: <b>${notification.data.title}</b><br>
+        Blog post author: <b>${notification.data.author}</b>`);
+        $('.notification', notificationNode).attr('href', notification.url);
+        document.getElementById('notification-container')?.prepend(notificationNode);
+        NotificationInit.addOrIncreaseNotificationBadge(1);
+    }
+
+    private static addOrIncreaseNotificationBadge(incrementBy: number) {
+        const badge = $('.button-badge');
+        if (badge.length > 0) {
+            badge.text(parseInt(badge.text()) + 1);
+        } else {
+            $('#notification-icon-container').append(`<span class="button-badge">1</span>`);
+        }
     }
 
 

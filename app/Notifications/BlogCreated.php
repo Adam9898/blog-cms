@@ -29,7 +29,7 @@ class BlogCreated extends Notification implements ShouldQueue {
         $this->blog = $blog;
         $this->data['blogAuthor'] = $this->blog->user->name;
         $this->data['blogTitle'] = $this->blog->title;
-        $this->data['url'] = 'blogs/' . $this->blog->id;
+        $this->data['url'] = '/blogs/' . $this->blog->id;
     }
 
     /**

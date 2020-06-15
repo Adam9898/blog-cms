@@ -18,8 +18,8 @@ export class NotificationsEchoListener extends EchoListener {
     protected listenerCallback(notificationPayload: any): void {
         const notificationObj: CMSNotification<Blog> = {
             data: new Blog(notificationPayload.blogAuthor, notificationPayload.blogTitle),
-            url: window.location.host + notificationPayload.url,
-            type: notificationPayload.type.substr(-1, notificationPayload.type.indexOf('\\'))
+            url: notificationPayload.url,
+            type: notificationPayload.type.substr(notificationPayload.type.indexOf('Blog') + 4)
         }
         NotificationInit.addBlogNotificationToDOM(notificationObj);
     }
