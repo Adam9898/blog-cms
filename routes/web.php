@@ -14,9 +14,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-})->name('home');
+Route::get('/', 'BlogController@index')->name('home');
 
 Route::resource('blogs', 'BlogController');
 

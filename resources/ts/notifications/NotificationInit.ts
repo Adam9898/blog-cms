@@ -22,7 +22,6 @@ export class NotificationInit {
 
     constructor() {
         if (this.userIdExist()) {
-            console.log('user id exist');
             this.initializeUserId();
             this.activateEchoChannelListeners();
         }
@@ -37,7 +36,6 @@ export class NotificationInit {
     }
 
     onNotificationButtonPress() {
-        console.log('button pressed');
         const elem = $('#notification-container');
         if (elem.hasClass('hide-tag')) {
             elem.removeClass('hide-tag');
@@ -53,7 +51,6 @@ export class NotificationInit {
         const notificationTemplate = document.querySelector('#notification-container template') as
             HTMLTemplateElement;
         const notificationNode = notificationTemplate.content.cloneNode(true);
-        console.log(notification);
         $('.notification .notification-headline', notificationNode).html(`A blog post has been <b>${notification.type.toLowerCase()}</b>`);
         $('.notification .notification-content', notificationNode).html(`Blog post title: <b>${notification.data.title}</b><br>
         Blog post author: <b>${notification.data.author}</b>`);

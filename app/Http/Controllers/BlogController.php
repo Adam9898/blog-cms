@@ -27,7 +27,7 @@ class BlogController extends Controller {
     protected $userRepository;
 
     public function __construct(BlogRepository $blogRepository, UserRepository $userRepository) {
-        $this->middleware('role:' . UserRole::Editor)->except('show');
+        $this->middleware('role:' . UserRole::Editor)->except('show', 'index');
         $this->blogRepository = $blogRepository;
         $this->userRepository = $userRepository;
     }
@@ -37,9 +37,9 @@ class BlogController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
-    {
-        //
+    public function index() {
+        $posts = $this->blogRepository->getPaginatedBlogs();
+        return view('home', ['posts' => $posts]);
     }
 
     /**

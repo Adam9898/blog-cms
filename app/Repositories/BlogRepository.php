@@ -26,6 +26,10 @@ class BlogRepository {
         return $returnValue;
     }
 
+    public function getPaginatedBlogs() {
+        return Blog::latest()->paginate(16);
+    }
+
     public function insertBlog(Blog $blog) {
         $blog->save();
         return $blog->id;
