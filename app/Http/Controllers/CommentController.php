@@ -8,6 +8,7 @@ use App\Http\Requests\CommentRequest;
 use App\Repositories\CommentRepository;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Log;
 
 class CommentController extends Controller {
 
@@ -25,6 +26,7 @@ class CommentController extends Controller {
      * @return \Illuminate\Http\Response
      */
     public function store(CommentRequest $request) {
+        Log::debug('Storing comment');
         $comment = new Comment($request->post());
         $comment->blog_id = $request->post()['blog'];
         $comment->user_id = Auth::user()->getAuthIdentifier();

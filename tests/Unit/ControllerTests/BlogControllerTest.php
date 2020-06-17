@@ -62,7 +62,7 @@ class BlogControllerTest extends TestCase {
             $blogRepository->allows('getSpecificBlog')->andReturn(new Blog());
         });
         $response = $this->get('/blogs/1');
-        $response->assertViewHas('blogs');
+        $response->assertViewHas('blog');
     }
 
     public function testCreateShouldRespondWithStatusCode200() {

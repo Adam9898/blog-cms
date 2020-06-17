@@ -8,6 +8,7 @@ $font-size-base: 0.9rem;
 $line-height-base: 1.6;
 $heading-size: 15pt;
 $main-font-size: 12pt;
+$meta-font-size: 10pt;
 
 // Colors
 $blue: #3490dc;
@@ -24,6 +25,7 @@ $wordpressBlue: #0073aa;
 $textColorMain: black;
 $textColorContrast: white;
 $newNotificationColor: cadetblue;
+$neutral: #E8E8E8;
 
 $windowsStyleGradient: linear-gradient(to bottom, #f7f7f7 0%,#efefef 49%,#cccccc 50%,#e0e0e0 100%);
 
@@ -32,3 +34,11 @@ $buttonsNextToEachOtherMarginSize: 10px;
 
 // Borders
 $borderStyleButtons: 5em;
+
+// Media query breakpoint
+$large: 1119px;
+$medium: 991px;
+
+// Blog post comment
+$commentImageWidth: 70px;
+$commentImageWidthAndContentHeightDifference: 9px;

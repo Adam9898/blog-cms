@@ -68,11 +68,11 @@ class BlogController extends Controller {
     /**
      * Display the specified blog.
      *
-     * @param Blog $blogs
+     * @param Blog $blog
      * @return \Illuminate\Http\Response
      */
-    public function show(Blog $blogs) {
-       return view('blog.show', compact('blogs'));
+    public function show(Blog $blog) {
+       return view('blog.show', compact('blog'));
     }
 
     /**

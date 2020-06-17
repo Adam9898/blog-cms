@@ -15,4 +15,5 @@ mix.ts('resources/ts/app.ts', 'public/js')
    .sass('resources/sass/app.scss', 'public/css')
    .sass('resources/sass/auth/login.scss', 'public/css')
    .sass('resources/sass/auth/register.scss', 'public/css')
-   .sass('resources/sass/edit.scss', 'public/css');
+   .sass('resources/sass/edit.scss', 'public/css')
+   .sass('resources/sass/show.scss', 'public/css');

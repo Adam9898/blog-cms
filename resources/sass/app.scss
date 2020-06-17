@@ -177,3 +177,9 @@ footer {
 .unread-notification {
     background-color: $newNotificationColor;
 }
+
+.sender-loading-animation {
+    img {
+        width: 90px;
+    }
+}

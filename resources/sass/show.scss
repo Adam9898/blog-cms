@@ -1,0 +1,102 @@
+@import "variables";
+@import "mixins";
+
+#content {
+    #blog-post {
+        #blog-content-container {
+            h1 {
+                @include unstyle-heading;
+                font-size: 20pt;
+                font-weight: bold;
+                margin-bottom: .6rem;
+            }
+            .post-meta[id=post-date-meta] {
+                margin-bottom: 1.5rem;
+            }
+        }
+    }
+    #comments {
+        > div { // comment container
+            display: grid;
+            grid-template-columns: repeat(12, 1fr);
+            padding: 10px;
+            background-color: $neutral;
+            font-size: 10pt;
+            margin-bottom: 40px;
+            &:first-child {
+                margin-top: 40px;
+            }
+            .comment-username {
+                margin: 0;
+                grid-column: 1 / 13;
+                grid-row: 2;
+                @media(max-width: $large) {
+                    font-size: 8pt;
+                }
+            }
+            .comment-content {
+                grid-column: 3 / 13;
+                grid-row: 1 / 3;
+                background-color: white;
+                padding: 5px;
+                margin: 0;
+                max-height: $commentImageWidth + $commentImageWidthAndContentHeightDifference;
+                overflow-y: auto;
+                @media(max-width: $large) {
+                    grid-column:  4 / 13;
+                }
+                @media(max-width: $medium) {
+                    max-height: 40px + $commentImageWidthAndContentHeightDifference;
+                }
+            }
+            img {
+                width: $commentImageWidth;
+                grid-column: 1 / 12;
+                grid-row: 1 / 2;
+                @media(max-width: $medium) {
+                    width: 40px;
+                }
+            }
+            form {
+                button {
+                    @include unstyle-button;
+                    color: red;
+                }
+            }
+        }
+    }
+    #new-comment {
+        display: flex;
+        flex-direction: column;
+        margin-top: 35px;
+        label {
+            align-self: flex-start;
+        }
+        textarea {
+            @include input-main;
+            height: 105px;
+            resize: none;
+            flex-grow: 1;
+            margin-top: 1em;
+            margin-bottom: 1em;
+            padding: 0.6em;
+            border-radius: 6px;
+            font-family: $font-family-sans-serif;
+            font-size: $meta-font-size;
+        }
+        .sender-loading-animation {
+            text-align: right;
+        }
+        button {
+            align-self: flex-end;
+        }
+    }
+}
+
+
+// classes
+.post-meta {
+    font-size: $meta-font-size;
+    margin-top: 4px;
+    margin-bottom: 4px;
+}

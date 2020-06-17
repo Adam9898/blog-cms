@@ -39,7 +39,7 @@ class BlogControllerTest extends TestCase {
 
     public function testShowShouldReturnViewThatHasProperBinding() {
         $response = $this->get('/blogs/1');
-        $response->assertViewHas('blogs');
+        $response->assertViewHas('blog');
     }
 
     public function testCreateShouldRespondWithStatusCode200() {
