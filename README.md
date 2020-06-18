@@ -1,79 +1,57 @@
-<p align="center"><img src="https://res.cloudinary.com/dtfbvvkyp/image/upload/v1566331377/laravel-logolockup-cmyk-red.svg" width="400"></p>
+# Simple blog system
+As the title of the project suggests, this is a blog content management system, in which authors
+can publish posts, and the rest of the world can read them.
+#### Visitors
+Regular visitors can sign up to the service, which allows them to receive automatic notifications
+when a new blog post is created and when it is updated/modified.</p>
+#### Usage
+1. Install docker.
+2. Install docker-compose, if it's not included with the regular docker installation.
+3. Go to your os hosts file, and add the following line to it: `127.0.0.1 cms.local`
+4. Clone the project, and execute the following command in the docker folder: `docker-compose up`
+5. Wait until docker-compose sets up the server environment.
+6. Open up your favorite web browser, and type into the url bar: `http://cms.local`
+7. Enjoy :)
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/d/total.svg" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/v/stable.svg" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://poser.pugx.org/laravel/framework/license.svg" alt="License"></a>
-</p>
+Docker will run a sql script on the first startup, which will setup the mysql database. It will insert
+two test users, one is a regular user, the other is an author. It is **important** to note, that the only
+way to add editorial permission to a user, is to add a relation in the database. Obviously this could be
+done in a much nicer way, but in the end of day, this is just a hobby project of mine with limited time.
 
-## About Laravel
+email: `regular@test.com`  
+password: `Test1234`
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+email: `editor@test.com`  
+password: `Test1234`
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+Use these accounts to the test the webapp. You will see some random test posts too, which is added with the
+sql script.
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+In order to create a new blog post, head over to `cms.local/blogs/create`  
+To edit a particular post, go to `cms.local/blogs/yourblogidhere/edit`
 
-## Learning Laravel
+There is no dedicated button for creating a new post, that is why I included the url here.
+This could be changed later for a nicer ux.
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+#### Notes and bugs
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+The notification system is very basic, and it is done in a synchronised way. You will get the new notifications
+live, however they will only be registered as read, once you refresh the page. Again, this is something that
+could be improved with a notification api controller, and some ajax magic.
 
-## Laravel Sponsors
+The registration validation could have smaller bugs. One particular I have found was that sometimes when you enter
+the same password twice, the form still says that they don't match.
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+Users can comment to a post, which is only removable by them, and only after refreshing the page after
+posting the new comment.
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[British Software Development](https://www.britishsoftware.co)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- [UserInsights](https://userinsights.com)
-- [Fragrantica](https://www.fragrantica.com)
-- [SOFTonSOFA](https://softonsofa.com/)
-- [User10](https://user10.com)
-- [Soumettre.fr](https://soumettre.fr/)
-- [CodeBrisk](https://codebrisk.com)
-- [1Forge](https://1forge.com)
-- [TECPRESSO](https://tecpresso.co.jp/)
-- [Runtime Converter](http://runtimeconverter.com/)
-- [WebL'Agence](https://weblagence.com/)
-- [Invoice Ninja](https://www.invoiceninja.com)
-- [iMi digital](https://www.imi-digital.de/)
-- [Earthlink](https://www.earthlink.ro/)
-- [Steadfast Collective](https://steadfastcollective.com/)
-- [We Are The Robots Inc.](https://watr.mx/)
-- [Understand.io](https://www.understand.io/)
-- [Abdel Elrafa](https://abdelelrafa.com)
-- [Hyper Host](https://hyper.host)
-- [Appoly](https://www.appoly.co.uk)
-- [OP.GG](https://op.gg)
-- [云软科技](http://www.yunruan.ltd/)
+#### For developers
 
-## Contributing
+To run the phpunit tests, first enter the workspace docker container: `docker-compose exec workspace bash`
+and once you are in the container, run `php artisan test`.
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
-
-## Code of Conduct
-
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
-
-## Security Vulnerabilities
-
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
-
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+The project itself was written in php, using the laravel (v7) framework. It is a hobby project I created by
+myself. The database is mysql, redis is being used as a message broker, and a nodejs websocket server is also running
+in a separate docker container.  
+The frontend is written is typescript and sass (scss). The blade templating engine is also being utilized.
+ **Compiled files are included**.

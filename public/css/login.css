@@ -1,0 +1,45 @@
+body {
+  background-image: url(/images/repeating-pattern.png?bf5a8b1a213aceac333dee3bf8c636ff);
+  background-size: 40px;
+}
+
+#content {
+  grid-column: 5/9;
+  align-self: center;
+}
+
+#content #form-container {
+  padding: 1.0416666667vw 2.0833333333vw;
+  background-color: rgba(0, 115, 170, 0.7);
+  border-radius: 0.5em;
+}
+
+#content #form-container form {
+  display: flex;
+  flex-direction: column;
+  color: white;
+}
+
+#content #form-container form input {
+  border: none;
+  outline: none;
+  margin-top: 0.4em;
+  margin-bottom: 1em;
+  border: solid 3px #0073aa;
+  height: 2em;
+}
+
+#content #form-container form input:focus {
+  border-color: #22b8ff;
+}
+
+form div:first-child {
+  font-size: 15pt;
+  font-weight: bold;
+  text-align: center;
+}
+
+.error {
+  margin-bottom: 10px;
+}
+

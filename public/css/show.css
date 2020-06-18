@@ -1,0 +1,132 @@
+#content #blog-post #blog-content-container h1 {
+  font-size: 12pt;
+  margin: 0;
+  padding: 0;
+  font-weight: normal;
+  font-size: 20pt;
+  font-weight: bold;
+  margin-bottom: 0.6rem;
+}
+
+#content #blog-post #blog-content-container .post-meta[id=post-date-meta] {
+  margin-bottom: 1.5rem;
+}
+
+#content #blog-post #blog-content-container img {
+  max-width: 100%;
+}
+
+#content #comments > div {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  padding: 10px;
+  background-color: #E8E8E8;
+  font-size: 10pt;
+  margin-bottom: 40px;
+}
+
+#content #comments > div:first-child {
+  margin-top: 40px;
+}
+
+#content #comments > div .comment-username {
+  margin: 0;
+  grid-column: 1/13;
+  grid-row: 2;
+}
+
+@media (max-width: 1119px) {
+  #content #comments > div .comment-username {
+    font-size: 8pt;
+  }
+}
+
+#content #comments > div .comment-content {
+  grid-column: 3/13;
+  grid-row: 1/3;
+  background-color: white;
+  padding: 5px;
+  margin: 0;
+  max-height: 79px;
+  overflow-y: auto;
+}
+
+@media (max-width: 1119px) {
+  #content #comments > div .comment-content {
+    grid-column: 4/13;
+  }
+}
+
+@media (max-width: 991px) {
+  #content #comments > div .comment-content {
+    max-height: 49px;
+  }
+}
+
+#content #comments > div img {
+  width: 70px;
+  grid-column: 1/12;
+  grid-row: 1/2;
+}
+
+@media (max-width: 991px) {
+  #content #comments > div img {
+    width: 40px;
+  }
+}
+
+#content #comments > div form button {
+  background: none;
+  padding: 0;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  color: red;
+}
+
+#content #new-comment {
+  display: flex;
+  flex-direction: column;
+  margin-top: 35px;
+}
+
+#content #new-comment label {
+  align-self: flex-start;
+}
+
+#content #new-comment textarea {
+  border: none;
+  outline: none;
+  margin-top: 0.4em;
+  margin-bottom: 1em;
+  border: solid 3px #0073aa;
+  height: 2em;
+  height: 105px;
+  resize: none;
+  flex-grow: 1;
+  margin-top: 1em;
+  margin-bottom: 1em;
+  padding: 0.6em;
+  border-radius: 6px;
+  font-family: opensans, sans-serif;
+  font-size: 10pt;
+}
+
+#content #new-comment textarea:focus {
+  border-color: #22b8ff;
+}
+
+#content #new-comment .sender-loading-animation {
+  text-align: right;
+}
+
+#content #new-comment button {
+  align-self: flex-end;
+}
+
+.post-meta {
+  font-size: 10pt;
+  margin-top: 4px;
+  margin-bottom: 4px;
+}
+
