@@ -173,7 +173,7 @@ services:
       - backend
     links:
       - docker-in-docker
-    command: ["sh","-c","composer install && php artisan queue:listen"]
+    command: ["sh","-c","composer install && php artisan queue:work"]
 
   ### PHP-FPM ##############################################
   php-fpm:
