@@ -411,7 +411,3 @@ RUN apt-get clean && \
 WORKDIR /var/www
 
 USER laradock
-
-RUN composer install
-# Start queue
-CMD ["php","artisan", "queue:work"]
